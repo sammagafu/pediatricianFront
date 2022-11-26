@@ -47,7 +47,6 @@ import AuthSideBar from '../components/AuthSideBar.vue';
 import { authStore } from '../stores/usersStore';
 import axios from 'axios';
 import { ref, onMounted } from 'vue'
-import jsPDF from 'jsPDF'
 
 
 
@@ -58,10 +57,7 @@ export default {
     },
     methods: {
         generateIdCard() {
-            let pdfName = 'test';
-            var doc = new jsPDF();
-            doc.text(this.name, 10, 10);
-            doc.save(pdfName + '.pdf');
+            window.alert("we are working on it")
         },
     },
     setup() {
