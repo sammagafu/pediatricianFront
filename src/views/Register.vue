@@ -216,7 +216,8 @@
 
 <script>
 // import { computed } from '@vue/reactivity';
-import axios from 'axios';
+// import axios from 'axios';
+import axiosInstance from '../http';
 import router from '../router';
 import { authStore } from '../stores/usersStore';
 
@@ -279,7 +280,7 @@ export default {
             }
             
 
-            axios.post('http://localhost:8000/api/v1/auth/register/', registradionData,).
+            axiosInstance.post('auth/register/', registradionData,).
                 then(response => {
                     router.push({ name: 'login' })
                 }).catch(error => {

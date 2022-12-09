@@ -63,7 +63,8 @@
 </template>
 
 <script>
-import axios from 'axios';
+// import axios from 'axios';
+import axiosInstance from '../http';
 export default {
     data() {
         return {
@@ -76,7 +77,7 @@ export default {
     },
     methods: {
         getProductDetail() {
-            axios.get(`http://api.pediatrics.or.tz/${this.$route.params.slug}`)
+            axiosInstance.get(`project/${this.$route.params.slug}`)
                 .then(response => {
                     this.project = response.data;
                     document.title = 'PAT: ' + response.data.projectname

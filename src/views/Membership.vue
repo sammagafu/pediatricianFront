@@ -59,7 +59,7 @@
     </section>
 </template>
 <script>
-import axios from 'axios';
+import axiosInstance from '../http';
 import { authStore } from '../stores/usersStore';
 import AuthSideBar from '../components/AuthSideBar.vue';
 import { ref, onMounted } from 'vue'
@@ -69,7 +69,7 @@ export default {
         const members = ref([])
 
         onMounted(() => {
-            axios.get('http://localhost:8000/api/v1/auth/users/')
+            axiosInstance.get('auth/users/')
                 .then(response => {
                     members.value = response.data;
                     console.log(response.data)

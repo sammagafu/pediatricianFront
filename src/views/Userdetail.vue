@@ -34,7 +34,8 @@
     import { ref, onMounted} from 'vue';
     import AuthSideBar from '../components/AuthSideBar.vue';
     import { useRoute } from 'vue-router';
-    import axios from 'axios';
+    import axiosInstance from '../http';
+
 
     export default {
         components :{ AuthSideBar },
@@ -44,7 +45,7 @@
             
             
             onMounted(() => {
-            axios.get(`http://localhost:8000/api/v1/auth/users/${route.params.membershipid}/`)
+                axiosInstance.get(`auth/users/${route.params.membershipid}/`)
                 .then(response => {
                     user.value = response.data;
                     // console.log(response.data)

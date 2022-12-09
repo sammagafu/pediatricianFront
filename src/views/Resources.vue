@@ -32,7 +32,8 @@
 </template>
 
 <script>
-import axios from 'axios'
+// import axios from 'axios'
+import axiosInstance from '../http';
 import AuthSideBar from '../components/AuthSideBar.vue';
 export default {
     data() {
@@ -42,7 +43,7 @@ export default {
     },
     methods: {
         getResources() {
-            axios.get("resource/")
+            axiosInstance.get("resource/")
                 .then(response => {
                 this.resources = response.data;
             })

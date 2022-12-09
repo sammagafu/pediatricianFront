@@ -58,7 +58,7 @@
 </style>
 
 <script>
-    import axios from 'axios';
+import axiosInstance from '../http';
     export default{
         data(){
             return {
@@ -67,7 +67,7 @@
         },
         methods:{
         getResources(){
-            axios.get("conference/")
+            axiosInstance.get("conference/")
             .then(response => {
                         this.confrences = response.data;
             })

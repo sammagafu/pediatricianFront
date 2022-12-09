@@ -49,7 +49,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axiosInstance from '../http';
 export default {
     data() {
         return {
@@ -62,7 +62,7 @@ export default {
     },
     methods: {
         getProductDetail() {
-            axios.get(`conference/${this.$route.params.slug}`)
+            axiosInstance.get(`conference/${this.$route.params.slug}`)
                 .then(response => {
                     this.confernce = response.data;
                     document.title = 'Conference : ' + response.data.name

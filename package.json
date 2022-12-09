@@ -10,6 +10,7 @@
     "jspdf": "^2.5.1",
     "pinia": "^2.0.17",
     "vue": "^3.2.37",
+    "vue-anka-cropper": "^1.1.0",
     "vue-axios": "^3.5.2",
     "vue-router": "^4.1.3"
   },

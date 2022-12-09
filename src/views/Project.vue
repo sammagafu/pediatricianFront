@@ -205,7 +205,8 @@
 </template>
 
 <script>
-    import axios from 'axios';
+    // import axios from 'axios';
+    import axiosInstance from '../http';
     export default{
         data(){
             return {
@@ -214,7 +215,7 @@
         },
         methods:{
         getResources(){
-            axios.get("http://localhost:8000/api/v1/project/")
+            axiosInstance.get("project/")
             .then(response => {
                         this.projects = response.data;
                         console.log(this.projects)

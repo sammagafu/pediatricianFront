@@ -91,7 +91,7 @@
                                     style="color: red">*</span></label>
                             <select class="form-control" name="profession" v-model="profession">
                                 <option value="Administrator">Administrator</option>
-                                <option value="Community health worker">ommunity health worker</option>
+                                <option value="Community health worker">Community health worker</option>
                                 <option value="First responder such as EMT or Paramedic">First responder such as EMT or
                                     Paramedic</option>
                                 <option value="Mental health provider such as counselor, psychologist, social worker">
@@ -143,13 +143,13 @@
                             </div>
                         </div>
 
-                        <div class="mb-3">
+                        <!-- <div class="mb-3">
                             <div class="form-group">
                                 <label class="control-label" for="avatar">Avatar (Add your passport for your ID or you can update later)</label>
                                 <br>
                                 <input type="file" name="image" id="avatar" placeholder="passport image for your avatar" @change="onFileUpload" ref="avatar">
                             </div>
-                        </div>
+                        </div> -->
 
                         <!-- <template v-if="typeofmember == Ordinary Member">
                         </template> -->

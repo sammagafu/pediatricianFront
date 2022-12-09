@@ -13,13 +13,12 @@
                     </div>
                     <div class="row">
                         <div class="col-md-4 avatar">
-                            <div v-if="user.avatar == 'http://localhost:8000/media/default.jpg'">
-                                <img :src="user.avatar" :alt="user.first_name + user.last_name" class="avatar">
-                            </div>
-                            <div v-else>
-                                <img src="../assets/images/avatar.jpg" alt="">
+                            <img :src="user.avatar" :alt="user.first_name + user.last_name" class="avatar">
+                            <div>
+                                
                             </div>
                         </div>
+
 
                         <div class="col-md-8">
                             <h2>{{ user.first_name }} {{ user.middle_name }} {{ user.last_name }}</h2>
@@ -45,15 +44,14 @@
 <script>
 import AuthSideBar from '../components/AuthSideBar.vue';
 import { authStore } from '../stores/usersStore';
-import axios from 'axios';
+// import axios from 'axios';
+import axiosInstance from '../http';
 import { ref, onMounted } from 'vue'
-
-
-
+import vueAnkaCropper from 'vue-anka-cropper'
 
 export default {
     components: {
-        AuthSideBar,
+        AuthSideBar,vueAnkaCropper
     },
     methods: {
         generateIdCard() {
@@ -66,7 +64,7 @@ export default {
         let user = ref([])
 
         onMounted(() => {
-            axios.get('auth/users/me/', {
+            axiosInstance.get('auth/users/me/', {
                 headers: {
                     "Authorization": `Bearer ${token}`
                 }

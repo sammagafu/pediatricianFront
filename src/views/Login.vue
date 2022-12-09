@@ -6,7 +6,7 @@
         <div class="container">
             <div class="col-md-4 offset-md-4">
                 <div class="tab-pane fade show active" id="pills-login" role="tabpanel" aria-labelledby="tab-login">
-                        <form @submit.prevent="userLoging">
+                        <form @submit.prevent="userLogin">
                             <!-- Email input -->
                             <div class="alert alert-danger" role="alert" v-if="message">
                                 {{message.detail}}
@@ -56,38 +56,47 @@
 </template>
 
 <script>
-    import { authStore } from "@/stores/usersStore";
-    import { ref } from "vue";
-    import { useRouter, useRoute } from 'vue-router'
-
-
-    export default{
-        setup(){
-            const router = useRouter();
-
-            const userStore = authStore()
-            const email = ref('')
-            const password = ref('')
-            const rememberme = ref(false)
-            const message = ref('')
-
-            
-            function userLoging(){
-                userStore.userLogin(email.value,password.value)
-                router.push('/membership')
-            }
-
-            return {
-                userStore,email,password,rememberme,message,userLoging
-            }
-
-        },
-        computed(){
-        },
-        methods : {
+import { authStore } from '@/stores/usersStore'
+import { ref } from 'vue';
+import axiosInstance from '../http';
+import { useRouter } from 'vue-router'
+export default {
+  setup(){
+    const router = useRouter()
+    const userstore = authStore()
+    const userdata = ref([])
+    const email = ref('')
+    const password = ref('')
+    const rememberme = ref(false)
+    const message = ref('')
     
-        }
+    // obtain jwt Token
+    function userLogin(){
+      const loginData = {
+        email: this.email,
+        password: this.password
+      }
+      axiosInstance.post('auth/login/',  loginData ).then(response => {
+        // axios.defaults.headers.common["Authorization"] = ""
+        // localStorage.removeItem("token")
+        userstore.authToken = response.data.access
+        userstore.refreshToken = response.data.refresh
+        userstore.isAuthenticated = true
+        // axios.defaults.headers.common["Authorization"] = "Bearer " + response.data.access
+        localStorage.setItem("access", response.data.access)
+        localStorage.setItem("refresh", response.data.refresh)
+      }).catch(error => {
+        console.log(error);
+      })
+      
+      router.push({name:'home'})
     }
+    return { email, password,rememberme,message,userLogin}
+  },
+  methods: {
+    // ...mapActions(userStore,)
+  }
+}
 </script>
 
 <style scoped>
