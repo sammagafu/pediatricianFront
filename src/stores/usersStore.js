@@ -20,8 +20,7 @@ export const authStore = defineStore({
       email: localStorage.getItem('email'),
       full_name: localStorage.getItem('full_name'),
       phone: localStorage.getItem('phone'),
-      is_student: localStorage.getItem('is_student'),
-      is_tuitor: localStorage.getItem('is_tuitor'),
+      is_staff: localStorage.getItem('is_staff'),
       mctnumber: localStorage.getItem('mctnumber'),
       avatar: localStorage.getItem('avatar'),
     },
@@ -37,18 +36,14 @@ export const authStore = defineStore({
 
     getUserData() {
       axiosInstance.get('auth/users/me/', {
-        // headers: {
-        //   "Authorization": `Bearer ${this.authToken}`
-        // }
       }).then(response => {
+        console.log(response.data)
         this.setUser({
           'userID': response.data.pk,
           'email': response.data.email,
           'is_staff': response.data.is_staff,
-          'full_name': response.data.full_name,
+          'full_name': response.data.get_user_fullname,
           'phone': response.data.phone,
-          'is_student': response.data.is_student,
-          'is_tuitor': response.data.is_tuitor,
           'mctnumber': response.data.mctnumber,
           'avatar': response.data.avatar,
         })
@@ -56,10 +51,10 @@ export const authStore = defineStore({
         localStorage.setItem('userID', response.data.pk)
         localStorage.setItem('full_name', response.data.full_name)
         localStorage.setItem('phone', response.data.phone)
-        localStorage.setItem('is_student', response.data.is_student)
-        localStorage.setItem('is_tuitor', response.data.is_tuitor)
         localStorage.setItem('mctnumber', response.data.mctnumber)
+        localStorage.setItem('is_staff', response.data.is_staff)
         localStorage.setItem('avatar', response.data.avatar)
+        this.isAuthenticated = true
       }).catch(error => {
         console.log(error)
       })

@@ -77,19 +77,19 @@ export default {
         password: this.password
       }
       axiosInstance.post('auth/login/',  loginData ).then(response => {
-        // axios.defaults.headers.common["Authorization"] = ""
-        // localStorage.removeItem("token")
         userstore.authToken = response.data.access
         userstore.refreshToken = response.data.refresh
         userstore.isAuthenticated = true
-        // axios.defaults.headers.common["Authorization"] = "Bearer " + response.data.access
         localStorage.setItem("access", response.data.access)
         localStorage.setItem("refresh", response.data.refresh)
+        console.log('response.data :>> ', response.data);
+        userstore.getUserData()
+    
       }).catch(error => {
         console.log(error);
       })
       
-      router.push({name:'home'})
+      router.push({name:'membership'})
     }
     return { email, password,rememberme,message,userLogin}
   },

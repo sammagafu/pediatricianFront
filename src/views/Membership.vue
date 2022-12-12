@@ -11,7 +11,7 @@
                         <input type="text" name="filter" id="filter" placeholder="Enter users name, email, or mct number" v-model="keyword">
                     </div> -->
                     
-                    <div class="card" v-for="me in members" :key="members.id">
+                    <div class="card" v-for="me in members">
                         <div class="row">
                             <template v-if="me.avatar == 'http://localhost:8000/media/default.jpg'">
                             <div class="col-md-2">
@@ -24,7 +24,7 @@
                             <template v-else>
                             <div class="col-md-2">
                                 <div class="img">
-                                    <img :src="me.get_avatar">
+                                    <img :src="me.avatar">
                                 </div>
                             </div>
                             </template>

@@ -19,8 +19,8 @@ export class AuthService {
   }
 
   static saveCurrentUserData(data) {
-    localStorage.setItem("current-user", JSON.stringify(data));
-    userstore.setUser(data)
+    // localStorage.setItem("current-user", JSON.stringify(data));
+    // userstore.setUser(data)
   }
 
   static getCurrentUserData() {

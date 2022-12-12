@@ -43,6 +43,7 @@ axiosInstance.interceptors.response.use(
     if (/\/auth\/users\/me/.test(response.config.url)) {
       // Save user data to the session storage.
       AuthService.saveCurrentUserData(response.data);
+      console.log(resoinse.data);
     }
 
     return response;

@@ -193,7 +193,8 @@
 <script>
 import AuthSideBar from '../components/AuthSideBar.vue';
 import { authStore } from '../stores/usersStore';
-import axios from 'axios';
+// import axios from 'axios';
+import axiosInstance from '../http';
 import { ref, onMounted } from 'vue'
 export default {
     components : {
@@ -223,11 +224,7 @@ export default {
         
         // function onUnmounted(callback: () => void): void
         onMounted(() => {
-            axios.get('auth/users/me/',{
-                headers: {
-                    "Authorization" : `Bearer ${token}`
-                }
-            })
+            axiosInstance.get('auth/users/me/')
                 .then(response => {
                     firstname.value = response.data.first_name
                     middlename.value = response.data.middle_name

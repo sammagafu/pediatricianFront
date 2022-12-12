@@ -72,7 +72,7 @@ import { ref } from 'vue';
 export default{
     setup(){
         const authdata = authStore()
-        const is_staff = ref(authdata.user.is_staff)
+        const is_staff = ref(authdata.userData.is_staff)
         return {
             authdata,
             is_staff
