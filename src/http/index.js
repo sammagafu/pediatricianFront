@@ -2,7 +2,7 @@ import axios from "axios";
 import { AuthService } from "../service/AuthService";
 
 const axiosInstance = axios.create({
-  baseURL: 'http://api.pediatrics.or.tz/api/v1/'
+  baseURL: 'https://api.pediatrics.or.tz/api/v1/'
 });
 
 const UNAUTHORIZED = 401;
