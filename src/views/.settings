@@ -51,3 +51,31 @@ server {
     }
 }
 sudo ln -s /etc/nginx/sites-available/pat /etc/nginx/sites-enabled
+
+
+# write a code to upload scrom files and display content on vue
+
+# //ES6
+
+# import Vue from 'vue'
+# import {scormHandler} from './scormHandler'
+
+# export default {
+#   data() {
+#     return {
+#       scormData: null
+#     }
+#   },
+#   methods: {
+#     uploadScormFile(file) {
+#       scormHandler.uploadScormFile(file).then(data => {
+#         this.scormData = data
+#       }).catch(error => {
+#         console.error(error)
+#       })
+#     },
+#     displayScormContent() {
+#       Vue.set(this, 'scormData', this.scormData)
+#     }
+#   }
+# }
