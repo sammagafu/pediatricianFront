@@ -1,7 +1,7 @@
 <template>
-  <div class="loading" style="display:block" v-if="authdata.isLoading">
+  <div class="loading" style="display: block" v-if="authdata.isLoading">
     <div class="loading-box">
-      <img class="img-fluid" src="../src/assets/images/loading.gif" alt="Loading">
+      <img class="img-fluid" src="../src/assets/images/loading.gif" alt="Loading" />
     </div>
   </div>
   <TopHeader />
@@ -10,7 +10,7 @@
 </template>
 
 <style>
-@import url('../src/assets/css/responsive.css');
+@import url("../src/assets/css/responsive.css");
 
 .loading {
   display: flex;
@@ -18,19 +18,17 @@
 </style>
 
 <script>
-import { RouterLink, RouterView } from 'vue-router'
-import TopHeader from '@/components/TopHeader.vue';
-import Footer from '@/components/Footer.vue';
-import { authStore } from '@/stores/usersStore';
-import { ref } from 'vue'
+import TopHeader from "@/components/TopHeader.vue";
+import Footer from "@/components/Footer.vue";
+import { authStore } from "@/stores/usersStore";
 
 export default {
-    setup() {
-        const authdata = authStore();
-        return {
-            authdata
-        };
-    },
-    components: { TopHeader, Footer }
-}
+  setup() {
+    const authdata = authStore();
+    return {
+      authdata,
+    };
+  },
+  components: { TopHeader, Footer },
+};
 </script>

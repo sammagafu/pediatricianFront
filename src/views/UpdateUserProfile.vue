@@ -2,12 +2,12 @@
   <section class="py-100">
     <div class="container">
       <div class="row">
-        <div class="col-lg-4">
+        <div class="col-lg-3">
           <AuthSideBar />
         </div>
-        <div class="col-md-8">
+        <div class="col-md-6">
           <div class="mb-4">
-            <h2>Update {{ user.first_name }}'s Profile</h2>
+            <h2>Update {{ firstname }}'s Profile</h2>
           </div>
 
           <form
@@ -16,7 +16,7 @@
             @submit.prevent="updateUser"
           >
             <div class="row">
-              <div class="col-md-6">
+              <div class="col-md-12">
                 <div class="mb-3">
                   <div class="form-group">
                     <label for="firstname"
@@ -191,17 +191,6 @@
                     </select>
                   </div>
                 </div>
-
-                <!-- <div class="mb-3">
-                            <div class="form-group">
-                                <label class="control-label" for="avatar">Avatar (Add your passport for your ID or you can update later)</label>
-                                <br>
-                                <input type="file" name="image" id="avatar" placeholder="passport image for your avatar" @change="onFileUpload" ref="avatar">
-                            </div>
-                        </div> -->
-
-                <!-- <template v-if="typeofmember == Ordinary Member">
-                        </template> -->
                 <span v-if="typeofmember == 'Ordinary Member'">
                   <div class="mb-3">
                     <div class="form-group">
@@ -252,23 +241,44 @@
             </div>
           </form>
         </div>
+        <div class="col-md-3">
+          <h2>Update and ID Picture</h2>
+          <div class="avatar-upload">
+            <div class="avatar-edit">
+              <input
+                ref="uploadInput"
+                type="file"
+                id="imageUpload"
+                accept="image/jpg, image/jpeg, image/png, image/gif"
+                @change="uploadImage"
+              />
+              <label for="imageUpload"><i class="fa fa-camera"></i></label>
+            </div>
+            <div class="avatar-preview">
+              <div
+                id="imagePreview"
+                style="background-image: url('http://i.pravatar.cc/500?img=7')"
+              ></div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 </template>
-
 <script>
 import AuthSideBar from "../components/AuthSideBar.vue";
+import { defineComponent, reactive, ref, onMounted } from "vue";
 import { authStore } from "../stores/usersStore";
-// import axios from 'axios';
 import axiosInstance from "../http";
-import { ref, onMounted } from "vue";
-export default {
+import VuePictureCropper, { cropper } from "vue-picture-cropper";
+
+export default defineComponent({
   components: {
     AuthSideBar,
+    VuePictureCropper,
   },
   setup() {
-    // const
     const authdata = authStore();
     const user = ref({});
     const firstname = ref("");
@@ -286,15 +296,17 @@ export default {
     const masters = ref("");
     const year = ref("");
     const msg = ref([]);
-
-    const token = authdata.token;
-
     // function onUnmounted(callback: () => void): void
+
+    const isShowModal = ref(false);
+    const uploadInput = ref(null);
+    const pic = ref("");
+
     onMounted(() => {
       axiosInstance
         .get("auth/users/me/")
         .then((response) => {
-          console.log(response);
+          // console.log(response);
           firstname.value = response.data.first_name;
           middlename.value = response.data.middle_name;
           lastname.value = response.data.last_name;
@@ -320,7 +332,7 @@ export default {
         first_name: firstname.value,
         middle_name: middlename.value,
         last_name: lastname.value,
-        phone: phonenumber.value,
+        phone: phone.value,
         mctnumber: mct.value,
         gender: gender.value,
         region: region.value,
@@ -332,17 +344,28 @@ export default {
         year: year.value,
       };
       axiosInstance
-        .put("auth/users/me/update-profile/", data)
+        .put("auth/users/me/", data)
         .then((response) => {
-          console.log(response.data);
-          //   firstname.value = response.data.first_name;
+          // console.log(response.data);
         })
         .catch((error) => {
           console.log(error);
         });
     }
 
+    function uploadImage(e){
+      const file = e.target.files[0];
+      const formData = new FormData()
+      formData.append('avatar', file)
+      axiosInstance.patch("auth/users/me/update-avatar/",formData).then((response)=>{
+        console.log('response :>> ', response);
+      }).catch((error)=>{
+        console.log('error :>> ', error);
+      })
+    }
+
     return {
+
       firstname,
       middlename,
       lastname,
@@ -360,16 +383,77 @@ export default {
       user,
       authdata,
       updateUser,
+      // Data
+      uploadInput,
+      pic,
+      isShowModal,
+
+      // Methods
+      uploadImage,
     };
   },
-};
+});
 </script>
 
 <style scoped>
-.avatar {
-  margin-bottom: 18px;
+.avatar-upload {
+  position: relative;
+  max-width: 205px;
+  margin: 50px auto;
 }
-img {
-  width: 200px !important;
+.avatar-upload .avatar-edit {
+  position: absolute;
+  right: 12px;
+  z-index: 1;
+  top: 10px;
+  
+}
+.avatar-upload .avatar-edit input {
+  display: none;
+}
+.avatar-upload .avatar-edit input + label {
+  display: inline-block;
+  width: 34px;
+  height: 34px;
+  margin-bottom: 0;
+  border-radius: 100%;
+  background: #ffffff;
+  border: 1px solid transparent;
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.12);
+  cursor: pointer;
+  font-weight: normal;
+  transition: all 0.2s ease-in-out;
+}
+.avatar-upload .avatar-edit input + label:hover {
+  background: #f1f1f1;
+  border-color: #d6d6d6;
+}
+.avatar-upload .avatar-edit input + label:after {
+  color: #757575;
+  position: absolute;
+  top: 10px;
+  top: 50%;
+  left: 50%;
+  text-align: center;
+  margin: auto;
+}
+.avatar-upload .avatar-preview {
+  width: 192px;
+  height: 192px;
+  position: relative;
+  border-radius: 100%;
+  border: 6px solid #f8f8f8;
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
+}
+.avatar-upload .avatar-preview > div {
+  width: 100%;
+  height: 100%;
+  border-radius: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.upload-button {
+  font-size: 1.2em;
 }
 </style>
