@@ -257,7 +257,7 @@
             <div class="avatar-preview">
               <div
                 id="imagePreview"
-                style="background-image: url('http://i.pravatar.cc/500?img=7')"
+                :style="{ 'background-image': 'url(' + pic + ')' }"
               ></div>
             </div>
           </div>
@@ -321,6 +321,7 @@ export default defineComponent({
           graduation.value = response.data.graduation;
           masters.value = response.data.masters;
           year.value = response.data.year;
+          pic.value = response.data.avatar
         })
         .catch((error) => {
           console.log(error);

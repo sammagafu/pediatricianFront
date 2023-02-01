@@ -58,8 +58,7 @@
                 <ul class="single-department-list">
                     <li><router-link :to="{name:'profile'}" class="link-level-1">Profile <i class="fas fa-angle-right"></i> </router-link></li>
                     <li><router-link :to="{name:'updateaccount'}" class="link-level-1">Update My Profile <i class="fas fa-angle-right"></i> </router-link></li>
-                    <li><a href="#">Download PAT ID <i class="fas fa-angle-right"></i></a></li>
-                    <!-- <li><a href="#">Update My Profile <i class="fas fa-angle-right"></i></a></li> -->
+                    <li><a href="#">Pay Annual Fees <i class="fas fa-angle-right"></i></a></li>
                 </ul>
             </div>
         </div>
