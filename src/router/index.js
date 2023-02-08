@@ -139,6 +139,11 @@ const router = createRouter({
         },
       ]
 
+    },
+    // { path: '*', redirect: '/404' }, 
+    {
+      path: "/:catchAll(.*)",
+      component : () => import('@/views/PageNotFound.vue')
     }
 
   ]

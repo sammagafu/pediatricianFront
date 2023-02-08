@@ -14,7 +14,7 @@
             <div class="row">
               <div class="col-lg-4">
                 <img
-                  :src="user.avatar"
+                  :src="avatar"
                   :alt="user.first_name + user.last_name"
                   class="img-thumbnail"
                 />
@@ -67,7 +67,7 @@ export default {
     generateReport () {
       html2pdf(this.$refs.document, {
 					margin: 1,
-					filename: 'document.pdf',
+					filename: this.user.get_user_fullname,
 					image: { type: 'jpeg', quality: 0.98 },
 					html2canvas: { dpi: 192, letterRendering: true },
 					jsPDF: { unit: 'in', format: 'letter', orientation: 'landscape' }
@@ -78,6 +78,9 @@ export default {
   mounted() {
     this.fecthUserData();
   },
+  computed :{
+    avatar(){ return this.user.avatar}
+  }
 };
 </script>
 

@@ -11,9 +11,9 @@
                         <input type="text" name="filter" id="filter" placeholder="Enter users name, email, or mct number" v-model="keyword">
                     </div> -->
                     
-                    <div class="card" v-for="me in members">
+                    <div class="card" v-for="me in members" :key="me.key">
                         <div class="row">
-                            <template v-if="me.avatar == 'http://localhost:8000/media/default.jpg'">
+                            <template v-if="me.avatar == 'https://api.pediatrics.or.tz/media/default.jpg'">
                             <div class="col-md-2">
                                 <div class="img">
                                     <img src="@/assets/images/avatar.jpg">
