@@ -15,6 +15,11 @@ export const authStore = defineStore({
     isAuthenticated: false,
     authToken: localStorage.getItem('access'),
     refreshToken: localStorage.getItem('refresh'),
+    token : {
+      access : localStorage.getItem('access'),
+      refresh : localStorage.getItem('refresh'),
+
+    },
     userData: {
       id: localStorage.getItem('userID'),
       email: localStorage.getItem('email'),
@@ -30,6 +35,7 @@ export const authStore = defineStore({
     doubleCount: (state) => state.counter * 2
   },
   actions: {
+
     setUser(user) {
       this.userData = user
     },
@@ -47,6 +53,7 @@ export const authStore = defineStore({
           'mctnumber': response.data.mctnumber,
           'avatar': response.data.avatar,
         })
+
         localStorage.setItem('email', response.data.email)
         localStorage.setItem('userID', response.data.pk)
         localStorage.setItem('full_name', response.data.full_name)

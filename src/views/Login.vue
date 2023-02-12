@@ -79,9 +79,13 @@ export default {
       axiosInstance.post('auth/login/',  loginData ).then(response => {
         userstore.authToken = response.data.access
         userstore.refreshToken = response.data.refresh
+    
         userstore.isAuthenticated = true
         localStorage.setItem("access", response.data.access)
         localStorage.setItem("refresh", response.data.refresh)
+
+        localStorage.setItem("token", response.data)
+
         console.log('response.data :>> ', response.data);
         userstore.getUserData()
     
