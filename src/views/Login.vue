@@ -1,4 +1,8 @@
 <template>
+      <div v-if="authdata.isLoading">
+    <LoadingScreen />
+  </div>
+
     <section class="py-100-70 login">
         <div class="text-center mb-4">
             <h2>Welcome Please Login</h2>
@@ -56,15 +60,18 @@
 </template>
 
 <script>
+import LoadingScreen from '../components/LoadingScreen.vue';
 import { authStore } from '@/stores/usersStore'
-import { ref } from 'vue';
+import { ref,onBeforeMount,onMounted } from 'vue';
 import axiosInstance from '../http';
 import { useRouter } from 'vue-router'
 export default {
+components : {
+    LoadingScreen
+  },
   setup(){
     const router = useRouter()
-    const userstore = authStore()
-    const userdata = ref([])
+    const authdata = authStore()
     const email = ref('')
     const password = ref('')
     const rememberme = ref(false)
@@ -76,30 +83,38 @@ export default {
         email: this.email,
         password: this.password
       }
+      onBeforeMount(()=>{
+      authdata.isLoading = true
+    });
+
+    onMounted(()=>{
+      authdata.isLoading = false
+    });
+
       axiosInstance.post('auth/login/',  loginData ).then(response => {
-        userstore.authToken = response.data.access
-        userstore.refreshToken = response.data.refresh
+        authdata.isLoading = true
+        authdata.authToken = response.data.access
+        authdata.refreshToken = response.data.refresh
     
-        userstore.isAuthenticated = true
+        authdata.isAuthenticated = true
         localStorage.setItem("access", response.data.access)
         localStorage.setItem("refresh", response.data.refresh)
 
         localStorage.setItem("token", response.data)
 
         console.log('response.data :>> ', response.data);
-        userstore.getUserData()
-    
+        authdata.getUserData() 
+        
+        authdata.isLoading = false
+        console.log('authdata.isLoading :>> ', authdata.isLoading); 
+        router.push({name:'membership'})
       }).catch(error => {
         console.log(error);
       })
       
-      router.push({name:'membership'})
     }
-    return { email, password,rememberme,message,userLogin}
+    return { email, password,rememberme,message,userLogin,authdata}
   },
-  methods: {
-    // ...mapActions(userStore,)
-  }
 }
 </script>
 

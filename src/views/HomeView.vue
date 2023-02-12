@@ -1,5 +1,8 @@
-<script setup></script>
 <template>
+  <div v-if="authdata.isLoading">
+    <LoadingScreen />
+  </div>
+    
   <section class="header">
     <div class="header-carousel header-img">
       <div class="sec-hero display-table">
@@ -9,7 +12,9 @@
             <div class="row">
               <div class="col-lg-8">
                 <div class="banner">
-                  <h1 class="handline text-white">Welcome to The Paediatric Association Of Tanzania</h1>
+                  <h1 class="handline text-white">
+                    Welcome to The Paediatric Association Of Tanzania
+                  </h1>
                   <!-- <p class="about-website">We maintain and improve the standards of professional competence and conduct
                     Of All The Members Related To Paediatrics And Child Health.</p>
                   <a class="btn-1 btn-2 ml-30" href="01_department.html">Our Department</a> -->
@@ -45,9 +50,13 @@
           <div class="features-item one">
             <div class="item-text">
               <h4>Login To Your Account</h4>
-              <p>Access your account, the PAT Member Directory, transcripts and more. Already logged in? Find your
-                Account here.</p>
-                <router-link :to="{name:'login'}" class="make-appoinment">Login to your account</router-link>
+              <p>
+                Access your account, the PAT Member Directory, transcripts and more.
+                Already logged in? Find your Account here.
+              </p>
+              <router-link :to="{ name: 'login' }" class="make-appoinment"
+                >Login to your account</router-link
+              >
               <!-- <a class="make-appoinment" href="01_appointment.html">Login to your account</a> -->
             </div>
           </div>
@@ -56,8 +65,10 @@
           <div class="features-item two">
             <div class="item-text">
               <h4>Collaborate</h4>
-              <p>Access your account, the PAT Member Directory, transcripts and more. Already logged in? Find your
-                Account here.</p>
+              <p>
+                Access your account, the PAT Member Directory, transcripts and more.
+                Already logged in? Find your Account here.
+              </p>
               <a class="make-appoinment" href="01_appointment.html">Make Appoinment</a>
             </div>
           </div>
@@ -66,11 +77,14 @@
           <div class="features-item three">
             <div class="item-text">
               <h4>Become A Member</h4>
-              <p>Access your account, the PAT Member Directory, transcripts and more. Already logged in? Find your
-                Account here.</p>
+              <p>
+                Access your account, the PAT Member Directory, transcripts and more.
+                Already logged in? Find your Account here.
+              </p>
               <!-- <a class="timetable" href="01_doctors-timetable.html">Discover Timetable</a> -->
-              <router-link :to="{name:'register'}" class="make-appoinment">Register Now</router-link>
-
+              <router-link :to="{ name: 'register' }" class="make-appoinment"
+                >Register Now</router-link
+              >
             </div>
           </div>
         </div>
@@ -83,7 +97,11 @@
         <div class="col-lg-5">
           <div class="about-img-box">
             <div class="img-box">
-              <img class="img-fluid" src="../assets/images/about/collaborate.jpg" alt="01 About">
+              <img
+                class="img-fluid"
+                src="../assets/images/about/collaborate.jpg"
+                alt="01 About"
+              />
             </div>
           </div>
         </div>
@@ -92,28 +110,41 @@
             <div class="sec-title">
               <h2>Welcome To The Pediatrics Association Of Tanzania</h2>
               <h3>Optimal Health For Children And Adolescents</h3>
-              <p class="sec-explain">Our Mission Is To Promote Optimal Physical, Mental, And Social Wellbeing For All
-                Children And Adolescents Through Sharing Knowledge Innovations And Expertise</p>
+              <p class="sec-explain">
+                Our Mission Is To Promote Optimal Physical, Mental, And Social Wellbeing
+                For All Children And Adolescents Through Sharing Knowledge Innovations And
+                Expertise
+              </p>
             </div>
             <ul class="about-core">
               <li>
                 <i class="fas fa-check-double" aria-hidden="true"></i>
-                <h4>To provide organizational means for health workers to come together as a professional body and to
-                  project its outlook and image in the best interests of society.</h4>
+                <h4>
+                  To provide organizational means for health workers to come together as a
+                  professional body and to project its outlook and image in the best
+                  interests of society.
+                </h4>
               </li>
               <li>
                 <i class="fas fa-check-double" aria-hidden="true"></i>
-                <h4>To set, maintain and improve the standards of professional competence and conduct of all the members
-                  related to Paediatrics and Child health. </h4>
+                <h4>
+                  To set, maintain and improve the standards of professional competence
+                  and conduct of all the members related to Paediatrics and Child health.
+                </h4>
               </li>
               <li>
                 <i class="fas fa-check-double" aria-hidden="true"></i>
-                <h4>To promote and advance the practice and study of Pediatrics and Child Health in the United Republic
-                  of Tanzania.</h4>
+                <h4>
+                  To promote and advance the practice and study of Pediatrics and Child
+                  Health in the United Republic of Tanzania.
+                </h4>
               </li>
               <li>
                 <i class="fas fa-check-double" aria-hidden="true"></i>
-                <h4>To protect the child’s interest in all level throughout the United Republic of Tanzania.</h4>
+                <h4>
+                  To protect the child’s interest in all level throughout the United
+                  Republic of Tanzania.
+                </h4>
               </li>
               <li>
                 <i class="fas fa-check-double" aria-hidden="true"></i>
@@ -121,22 +152,29 @@
               </li>
               <li>
                 <i class="fas fa-check-double" aria-hidden="true"></i>
-                <h4>To liaise by meetings, correspondence or otherwise with other Pediatrics Associations and Societies.
+                <h4>
+                  To liaise by meetings, correspondence or otherwise with other Pediatrics
+                  Associations and Societies.
                 </h4>
               </li>
               <li>
                 <i class="fas fa-check-double" aria-hidden="true"></i>
-                <h4> To establish projects and programs independently or in collaboration with other stake holders with
-                  the aim of improving child care and community health in Tanzania.</h4>
+                <h4>
+                  To establish projects and programs independently or in collaboration
+                  with other stake holders with the aim of improving child care and
+                  community health in Tanzania.
+                </h4>
               </li>
               <li>
                 <i class="fas fa-check-double" aria-hidden="true"></i>
-                <h4> To Promote Cooperation and Friendship among the Pediatricians.</h4>
+                <h4>To Promote Cooperation and Friendship among the Pediatricians.</h4>
               </li>
               <li>
                 <i class="fas fa-check-double" aria-hidden="true"></i>
-                <h4>To do all such other things as may be conducive to the attainment of the foregoing aims and
-                  objectives or any one of them.</h4>
+                <h4>
+                  To do all such other things as may be conducive to the attainment of the
+                  foregoing aims and objectives or any one of them.
+                </h4>
               </li>
             </ul>
           </div>
@@ -157,7 +195,11 @@
         <div class="col-md-6 col-lg-3">
           <div class="doctors-box">
             <div class="img-box">
-              <img class="img-fluid" src="../assets/images/doctors/pius.jpg" alt="03 doctors">
+              <img
+                class="img-fluid"
+                src="../assets/images/doctors/pius.jpg"
+                alt="03 doctors"
+              />
             </div>
             <div class="text-box text-center">
               <h5>Dr Pius Muzzazzi</h5>
@@ -168,7 +210,11 @@
         <div class="col-md-6 col-lg-3">
           <div class="doctors-box">
             <div class="img-box">
-              <img class="img-fluid" src="../assets/images/doctors/theo.jpg" alt="03 doctors">
+              <img
+                class="img-fluid"
+                src="../assets/images/doctors/theo.jpg"
+                alt="03 doctors"
+              />
             </div>
             <div class="text-box text-center">
               <h5>Dr Theopista Masenge</h5>
@@ -179,7 +225,11 @@
         <div class="col-md-6 col-lg-3">
           <div class="doctors-box">
             <div class="img-box">
-              <img class="img-fluid" src="../assets/images/doctors/kandi.jpg" alt="03 doctors">
+              <img
+                class="img-fluid"
+                src="../assets/images/doctors/kandi.jpg"
+                alt="03 doctors"
+              />
             </div>
             <div class="text-box text-center">
               <h5>Dr Catherine Kandi Muze</h5>
@@ -190,7 +240,11 @@
         <div class="col-md-6 col-lg-3">
           <div class="doctors-box">
             <div class="img-box">
-              <img class="img-fluid" src="../assets/images/doctors/furaha.jpg" alt="01 doctors">
+              <img
+                class="img-fluid"
+                src="../assets/images/doctors/furaha.jpg"
+                alt="01 doctors"
+              />
             </div>
             <div class="text-box text-center">
               <h5>Dr Furaha Kyesi</h5>
@@ -201,10 +255,14 @@
         <div class="col-md-6 col-lg-3">
           <div class="doctors-box">
             <div class="img-box">
-              <img class="img-fluid" src="../assets/images/doctors/haika.jpg" alt="02 doctors">
+              <img
+                class="img-fluid"
+                src="../assets/images/doctors/haika.jpg"
+                alt="02 doctors"
+              />
             </div>
             <div class="text-box text-center">
-              <h5>Dr Haika Mariki </h5>
+              <h5>Dr Haika Mariki</h5>
               <span>Assistant Secretaty General</span>
             </div>
           </div>
@@ -265,7 +323,7 @@
   background-image: url(../assets/images/header/04_header.jpg);
   /* style="background-image: url(/assets/images/header/04_header.jpg) */
 }
-.features-box{
+.features-box {
   padding: 20 !important;
 }
 
@@ -273,8 +331,31 @@ h1 .handline {
   color: #fff;
 }
 
-.overlay{
-  background-color: rgba(0, 0, 10, .6);
+.overlay {
+  background-color: rgba(0, 0, 10, 0.6);
 }
-
 </style>
+
+<script>
+import LoadingScreen from '../components/LoadingScreen.vue';
+import { authStore } from '../stores/usersStore';
+import { onBeforeMount,onMounted } from 'vue';
+export default {
+  name:"Homeview",
+  components : {
+    LoadingScreen
+  },
+  setup(){
+    const authdata = authStore()
+    onBeforeMount(()=>{
+      authdata.isLoading = true
+    });
+    onMounted(()=>{
+      authdata.isLoading = false
+    });
+    return {
+      authdata
+    }
+  }
+}
+</script>

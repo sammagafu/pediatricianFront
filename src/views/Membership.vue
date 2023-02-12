@@ -1,4 +1,7 @@
 <template>
+      <div v-if="authdata.isLoading">
+    <LoadingScreen />
+  </div>
     <section class="py-100">
         <div class="container">
             <div class="row">
@@ -62,13 +65,14 @@
 import axiosInstance from '../http';
 import { authStore } from '../stores/usersStore';
 import AuthSideBar from '../components/AuthSideBar.vue';
-import { ref, onMounted } from 'vue'
+import { ref, onMounted,onBeforeMount } from 'vue'
 export default {
     setup(){
         const authdata = authStore()
         const members = ref([])
 
         onMounted(() => {
+            authdata.isLoading = false
             axiosInstance.get('auth/users/')
                 .then(response => {
                     members.value = response.data;
@@ -79,7 +83,7 @@ export default {
                 });
         })
         return {
-            members
+            members,authdata
         }
     },
     components: { AuthSideBar }

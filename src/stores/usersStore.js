@@ -13,6 +13,7 @@ export const authStore = defineStore({
 
   state: () => ({
     isAuthenticated: false,
+    isLoading : false,
     authToken: localStorage.getItem('access'),
     refreshToken: localStorage.getItem('refresh'),
     token : {

@@ -1,9 +1,4 @@
 <template>
-  <div class="loading" style="display: block" v-if="authdata.isLoading">
-    <div class="loading-box">
-      <img class="img-fluid" src="../src/assets/images/loading.gif" alt="Loading" />
-    </div>
-  </div>
   <TopHeader />
   <RouterView />
   <Footer />

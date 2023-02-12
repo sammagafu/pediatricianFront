@@ -1,4 +1,8 @@
 <template>
+    <div v-if="authdata.isLoading">
+    <LoadingScreen />
+  </div>
+  
   <section class="breadcrumb-header">
     <div class="overlay"></div>
     <div class="container">
@@ -243,3 +247,27 @@
   height: 60vh;
 }
 </style>
+
+<script>
+import LoadingScreen from '../components/LoadingScreen.vue';
+import { authStore } from '../stores/usersStore';
+import { onBeforeMount,onMounted } from 'vue';
+export default {
+  name:"Homeview",
+  components : {
+    LoadingScreen
+  },
+  setup(){
+    const authdata = authStore()
+    onBeforeMount(()=>{
+      authdata.isLoading = true
+    });
+    onMounted(()=>{
+      authdata.isLoading = false
+    });
+    return {
+      authdata
+    }
+  }
+}
+</script>
