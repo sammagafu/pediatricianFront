@@ -60,7 +60,7 @@
 </template>
 
 <script>
-import LoadingScreen from '../components/LoadingScreen.vue';
+import LoadingScreen from '@/components/LoadingScreen.vue';
 import { authStore } from '@/stores/usersStore'
 import { ref,onBeforeMount,onMounted } from 'vue';
 import axiosInstance from '../http';
