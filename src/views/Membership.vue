@@ -1,5 +1,5 @@
 <template>
-      <div v-if="authdata.isLoading">
+<div v-if="authdata.isLoading">
     <LoadingScreen />
   </div>
     <section class="py-100">
@@ -62,17 +62,22 @@
     </section>
 </template>
 <script>
+import LoadingScreen from '@/components/LoadingScreen.vue';
 import axiosInstance from '../http';
 import { authStore } from '../stores/usersStore';
 import AuthSideBar from '../components/AuthSideBar.vue';
 import { ref, onMounted,onBeforeMount } from 'vue'
 export default {
+    components :{
+        LoadingScreen,
+    },
     setup(){
         const authdata = authStore()
         const members = ref([])
-
+        onBeforeMount(()=>{
+            authdata.isLoading = true
+        })
         onMounted(() => {
-            authdata.isLoading = false
             axiosInstance.get('auth/users/')
                 .then(response => {
                     members.value = response.data;
@@ -81,6 +86,7 @@ export default {
                 .catch(error => {
                     console.log(error);
                 });
+            authdata.isLoading = false  
         })
         return {
             members,authdata
@@ -89,6 +95,7 @@ export default {
     components: { AuthSideBar }
 }
 </script>
+// 6000x12332
 
 <style scoped>
 img {
