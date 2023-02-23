@@ -17,7 +17,7 @@ axiosInstance.interceptors.request.use((config) => {
   ) {
     config.headers["Authorization"] = `Bearer ${AuthService.getToken('access')}`;
   }
-  return config;s
+  return config;
 });
 // auth/users/me/
 axiosInstance.interceptors.response.use(
