@@ -46,10 +46,11 @@ import {logoBase64} from '../logoBase64Image'
 pdfMake.vfs = pdfFonts.pdfMake.vfs
 
 onMounted(() => {
-  axiosInstance.get("auth/users/me/")
-  .then(response => {
+  axiosInstance.get("https://api.pediatrics.or.tz/api/v1/auth/users/")
+  .then(async(response) => {
     console.log(response.data);
-    userData.user = response.data;
+    const [user] =await response.data;
+    userData.user=user
   })
   .catch(error => {
     console.log(error);
@@ -90,7 +91,7 @@ const generatePdf =async () => {
                 },
                 {
                   width: 500,
-                  image: logoBase64, alignment: 'center', width: 130, height: 90
+                  image: `data:image/png;base64,${userData.user.get_base64_image}`, alignment: 'center', width: 130, height: 90
                 }
               ]
             }],
@@ -115,7 +116,7 @@ const generatePdf =async () => {
         {	width: 200,
           text:[{text: `${userData.user.first_name} ${userData.user.middle_name} ${userData.user.last_name} \n`,fontSize:16,	bold: true,alignment: 'left'}, {text:'Professional :',width:200},{text: `${userData.user.profession} \n`,alignment: 'left'}, {text:'Member ID :',width:200},{text: `${userData.user.memberId} \n`,alignment: 'left'},{text:'Phone  :',width:200},{text: `${userData.user.phone} \n\n\n`,alignment: 'left'},{text:'Sign :',width:200}]},
         {	width: 500,
-          image: logoBase64,alignment: 'center',width: 130,height:90}
+          image: `data:image/png;base64,${userData.user.get_base64_image}`,alignment: 'center',width: 130,height:90}
       ]
     },
     '\n',
