@@ -65,65 +65,47 @@ user:{}
 const generatePdf =async () => {
 
   const docDefinition = {
+    // watermark: { text: 'PAT Membership Card', color: 'blue', opacity: 0.3, bold: true, italics: false,fontSize: 40 },
+    pageSize: 'A5',
+    pageOrientation: 'landscape',
     content: [
     {
       table: {
           margin:10,
           body: [
             [{
-              border: [true, true, true, false],
+              border: [false, false, false, false],
               columns: [
                 {
-                  image: logoBase64, alignment: 'center', width: 60, height: 40
+                  image: logoBase64, alignment: 'center', width: 80, height: 80
                 },
                 {
-                  margin:5,
-                  text: [{ text: 'PAT Membership Identity Card \n', bold: true, fontSize: 19 }, { text: 'Muhimbili', fontSize: 11 }]
+                  margin:10,
+                  text: [{ text: 'Pediatrics Association Of Tanzania \n', bold: true, fontSize: 18,alignment:'center',style:'header' }, 
+                  { text: 'Membership Identity Card', fontSize: 11.124,color: 'blue',alignment:'center' }]
                 }
               ]
             }],
             [{
-              border: [true, false, true, false],
+              border: [false, false, false, false],
+              margin:[0,20],
               columns: [
                 {
-                  width: 200,
+                  width: 300,
                   text: [{ text: `${userData.user.first_name} ${userData.user.middle_name} ${userData.user.last_name} \n`, fontSize: 16, bold: true, alignment: 'left' }, { text: 'Professional :', width: 200 }, { text: `${userData.user.profession} \n`, alignment: 'left' }, { text: 'Member ID :', width: 200 }, { text: `${userData.user.memberId} \n`, alignment: 'left' }, { text: 'Phone  :', width: 200 }, { text: `${userData.user.phone} \n\n\n`, alignment: 'left' }, { text: 'Sign : \n', width: 200 }],
                 },
                 {
                   width: 500,
-                  image: `data:image/png;base64,${userData.user.get_base64_image}`, alignment: 'center', width: 130, height: 90
+                  image: `data:image/png;base64,${userData.user.get_base64_image}`, alignment: 'center', width: 180, height: 180
                 }
               ]
             }],
-            [{ border: [true, false, true, true],	
+            [{ border: [false, false, false, false],	
               style: ['quote', 'small'], 
               text: 'Incase of lost of this ID please return to above address', fontSize: 10, italics: true }]
           ]
         }
       },
-    '\n\n\n',
-    {
-      columns:[
-        {width:150,
-          image:logoBase64, alignment: 'center', width: 60,height:40},
-        {width:600,
-          margin:5,
-          text:[{text:'PAT Membership Identity Card \n',	bold: true,fontSize:19},{text:'Muhimbili',fontSize:11}]}
-      ]
-    },
-    {
-    columns:[
-        {	width: 200,
-          text:[{text: `${userData.user.first_name} ${userData.user.middle_name} ${userData.user.last_name} \n`,fontSize:16,	bold: true,alignment: 'left'}, {text:'Professional :',width:200},{text: `${userData.user.profession} \n`,alignment: 'left'}, {text:'Member ID :',width:200},{text: `${userData.user.memberId} \n`,alignment: 'left'},{text:'Phone  :',width:200},{text: `${userData.user.phone} \n\n\n`,alignment: 'left'},{text:'Sign :',width:200}]},
-        {	width: 500,
-          image: `data:image/png;base64,${userData.user.get_base64_image}`,alignment: 'center',width: 130,height:90}
-      ]
-    },
-    '\n',
-    {	
-      // style: ['quote', 'small'],
-      text:'Incase of lost of this ID please return to above address',fontSize:10,italics: true}
-    
     ]
   }
   pdfMake.createPdf(docDefinition).download(`${userData.user.first_name}.pdf`)
