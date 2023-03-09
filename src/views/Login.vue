@@ -1,7 +1,7 @@
 <template>
-      <div v-if="authdata.isLoading">
+    <!-- <div v-if="authdata.isLoading">
     <LoadingScreen />
-  </div>
+  </div> -->
 
     <section class="py-100-70 login">
         <div class="text-center mb-4">
