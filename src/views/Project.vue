@@ -1,4 +1,6 @@
 <template>
+    <LoadingScreen :loading="authdata.isLoading"/>
+    
         <section class="breadcrumb-header">
         <div class="overlay"></div>
         <div class="container">

@@ -1,4 +1,5 @@
 <template>
+  <LoadingScreen :loading="authdata.isLoading"/>
   <section class="py-100">
     <div class="container">
       <div class="row">

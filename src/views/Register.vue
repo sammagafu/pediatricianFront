@@ -1,4 +1,6 @@
 <template>
+    <LoadingScreen :loading="authdata.isLoading"/>
+    
     <section class="py-100-70 login">
         <div class="text-center mb-4">
             <h2>Welcome Please Register</h2>

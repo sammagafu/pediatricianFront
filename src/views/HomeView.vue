@@ -1,7 +1,6 @@
 <template>
-  <div v-if="authdata.isLoading">
-    <LoadingScreen />
-  </div>
+
+<LoadingScreen :loading="authdata.isLoading"/>
     
   <section class="header">
     <div class="header-carousel header-img">
