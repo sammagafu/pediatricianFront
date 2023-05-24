@@ -100,7 +100,7 @@ const generatePdf =async () => {
                 },
                 {
                   width: 500,
-                  image: `data:image/png;base64,${userData.user.get_base64_image}`, alignment: 'center', width: 180, height: 180
+                  image: `data:image/png;base64,${userData.user.get_base64_image}`, alignment: 'center', width: 185, height: 185
                 }
               ]
             }],
