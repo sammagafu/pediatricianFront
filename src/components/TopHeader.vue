@@ -70,7 +70,7 @@
                         </li>
 
                         <li class="item-level-1" v-else>
-                            <a class="link-level-1" @click="logOutUser">Logout</a>
+                            <a class="link-level-1" @click="userStore.logoutUser">Logout</a>
                             <!-- <router-link :to="{name:'login'}" class="link-level-1">Logout</router-link> -->
                         </li>
                     </ul>
@@ -98,14 +98,9 @@ export default{
     setup(){
         const userStore = authStore()
         const router = useRouter()
-        function logOutUser(){
-            userStore.logoutUser()
-            router.push('/account/login')
 
-            // console.log("clicked");
-        }
         return {
-            userStore,logOutUser
+            userStore
         }
     },
     data(){

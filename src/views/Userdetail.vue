@@ -32,20 +32,27 @@
 </template>
 
 <script>
-    import { ref, onMounted} from 'vue';
-    import AuthSideBar from '../components/AuthSideBar.vue';
-    import { useRoute } from 'vue-router';
-    import axiosInstance from '../http';
+import axiosInstance from '../http';
+import AuthSideBar from '@/components/AuthSideBar.vue';
+import LoadingScreen from '@/components/LoadingScreen.vue';
+import { ref, onMounted,onBeforeMount } from 'vue'
+import { authStore } from '@/stores/usersStore';
+import { useRoute } from 'vue-router';
 
 
     export default {
-        components :{ AuthSideBar },
+        components :{ AuthSideBar,LoadingScreen },
         setup(){
             const user = ref([])
             const route = useRoute()
+            const authdata = authStore()
             
-            
+            onBeforeMount(()=>{
+            authdata.isLoading = true
+        })
+
             onMounted(() => {
+            authdata.isLoading = true
                 axiosInstance.get(`auth/users/${route.params.membershipid}/`)
                 .then(response => {
                     user.value = response.data;
@@ -54,10 +61,12 @@
                 .catch(error => {
                     console.log(error);
                 });
+            authdata.isLoading = false
+
         })
 
             return {
-                user
+                user,authdata
             }
         }
     }

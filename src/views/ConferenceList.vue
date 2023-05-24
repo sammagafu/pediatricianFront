@@ -1,5 +1,4 @@
 <template>
-
 <LoadingScreen :loading="authdata.isLoading"/>
 
     <section class="breadcrumb-header">
@@ -25,7 +24,7 @@
     <section class="py-100">
         <div class="container">
             <div class="row">
-                <div class="col-md-6 col-lg-4" v-for="conf in confrences" :key="conf.index">
+                <div class="col-md-6 col-lg-4" v-for="conf in conferences" :key="conf.index">
                     <div class="gallery-item">
                         <span style="top: -133.484px; left: 261px;"></span>
                         <div class="img-box">
@@ -61,33 +60,35 @@
 </style>
 
 <script>
-import axiosInstance from '../http';
-    export default{
-        data(){
-            return {
-                confrences:[]
-            }
-        },
-        methods:{
-        getResources(){
-            axiosInstance.get("conference/")
-            .then(response => {
-                        this.confrences = response.data;
-            })
-            .catch(error => {
-                console.log(error);
-            });
-        }
+import LoadingScreen from '../components/LoadingScreen.vue';
+import { authStore } from "@/stores/usersStore";
+import { ref, onBeforeMount, onMounted } from "vue";
+import axios from 'axios';
+
+
+export default {
+    components :{
+        LoadingScreen,
     },
-    mounted (){
-        this.getResources()
-    }
+    setup(){
+        const authdata = authStore();
+        const conferences = ref(null);
 
+        onBeforeMount(() => {
+        authdata.isLoading = true;
+      });
+
+      onMounted(() => {
+        
+        axios.get('https://api.pediatrics.or.tz/api/v1/conference/').then((response)=>{
+            conferences.value = response.data
+        })
+        authdata.isLoading = false;
+      });
+
+        return {
+            authdata,conferences
+        }
     }
+}
 </script>
-
-<style scoped>
-    .breadcrumb-header{
-      background-image: url(../assets/images/header/01_header.jpg)
-    }
-  </style>

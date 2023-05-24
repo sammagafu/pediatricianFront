@@ -87,13 +87,14 @@ components : {
 
     onMounted(()=>{
       authdata.isLoading = false
+      console.log('authdata.token :>> ', authdata.token);
     });
 
-      axiosInstance.post('auth/login/',  loginData ).then(response => {
+      axiosInstance.post('auth/login/', loginData ).then(response => {
         authdata.isLoading = true
+        authdata.token = response.data
         authdata.authToken = response.data.access
         authdata.refreshToken = response.data.refresh
-    
         authdata.isAuthenticated = true
         localStorage.setItem("access", response.data.access)
         localStorage.setItem("refresh", response.data.refresh)
@@ -104,7 +105,7 @@ components : {
         authdata.getUserData() 
         
         authdata.isLoading = false
-        console.log('authdata.isLoading :>> ', authdata.isLoading); 
+        console.log('authdata.token:>> ', authdata.token); 
         router.push({name:'membership'})
       }).catch(error => {
         console.log(error);

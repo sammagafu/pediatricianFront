@@ -38,31 +38,37 @@
 </template>
 
 <script>
-// import axios from 'axios';
+// import axios from 'axios'
 import axiosInstance from '../http';
-import AuthSideBar from '../components/AuthSideBar.vue';
-
+import AuthSideBar from '@/components/AuthSideBar.vue';
+import LoadingScreen from '@/components/LoadingScreen.vue';
+import { ref, onMounted,onBeforeMount } from 'vue'
+import { authStore } from '@/stores/usersStore';
 export default {
-    data() {
-        return {
-            update: []
-        }
-    },
-    methods: {
-        getResources() {
-            axiosInstance.get("update/")
+
+    setup(){
+        const authdata = authStore()
+        const update = ref([])
+        onBeforeMount(()=>{
+            authdata.isLoading = true
+        })
+        onMounted(() => {
+            authdata.isLoading = true
+            axiosInstance.get('update')
                 .then(response => {
-                    this.update = response.data;
-                    console.log(this.update)
+                    update.value = response.data;
+                    console.log(response.data)
                 })
                 .catch(error => {
                     console.log(error);
                 });
+            authdata.isLoading = false  
+        })
+        return {
+            update,authdata
         }
     },
-    mounted() {
-        this.getResources()
-    },
-    components: { AuthSideBar }
+
+    components: { AuthSideBar,LoadingScreen }
 }
 </script>

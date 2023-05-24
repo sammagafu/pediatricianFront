@@ -45,30 +45,67 @@
 </template>
 
 <script>
-import AuthSideBar from "../components/AuthSideBar.vue";
-import axiosInstance from "../http";
+// import axios from 'axios'
+import axiosInstance from '../http';
+import AuthSideBar from '@/components/AuthSideBar.vue';
+import LoadingScreen from '@/components/LoadingScreen.vue';
+import { ref, onMounted,onBeforeMount } from 'vue'
+import { authStore } from '@/stores/usersStore';
+import { useRouter } from 'vue-router'
+
 export default {
-  data() {
-    return {
-      up: [],
-    };
-  },
-  mounted() {
-    this.getProductDetail();
-  },
-  methods: {
-    getProductDetail() {
-      axiosInstance
-        .get(`update/${this.$route.params.slug}`)
-        .then((response) => {
-          this.up = response.data;
-          document.title = "PAT: " + response.data.projectname;
+
+    setup(){
+        const router = useRouter()
+        const authdata = authStore()
+        const up = ref([])
+        onBeforeMount(()=>{
+            authdata.isLoading = true
         })
-        .catch((error) => {
-          console.log(error);
-        });
+        onMounted(() => {
+            axiosInstance.get(`update/${this.$route.params.slug}`)
+                .then(response => {
+                  up.value = response.data;
+                    console.log(response.data)
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+            authdata.isLoading = false  
+        })
+        return {
+          up,authdata
+        }
     },
-  },
-  components: { AuthSideBar },
-};
+
+    components: { AuthSideBar,LoadingScreen }
+}
 </script>
+
+// import AuthSideBar from "../components/AuthSideBar.vue";
+// import axiosInstance from "../http";
+// export default {
+//   data() {
+//     return {
+//       up: [],
+//     };
+//   },
+//   mounted() {
+//     this.getProductDetail();
+//   },
+//   methods: {
+//     getProductDetail() {
+//       axiosInstance
+//         .get(`update/${route.params.slug}`)
+//         .then((response) => {
+//           this.up = response.data;
+//           document.title = "PAT: " + response.data.projectname;
+//         })
+//         .catch((error) => {
+//           console.log(error);
+//         });
+//     },
+//   },
+//   components: { AuthSideBar },
+// };
+// </script>

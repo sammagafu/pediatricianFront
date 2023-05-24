@@ -68,7 +68,7 @@ import AuthSideBar from '../components/AuthSideBar.vue';
 import { ref, onMounted,onBeforeMount } from 'vue'
 export default {
     components :{
-        LoadingScreen,
+        LoadingScreen,AuthSideBar
     },
     setup(){
         const authdata = authStore()
@@ -91,10 +91,8 @@ export default {
             members,authdata
         }
     },
-    components: { AuthSideBar }
 }
 </script>
-// 6000x12332
 
 <style scoped>
 img {

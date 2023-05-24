@@ -39,6 +39,8 @@
 
 import { ref,reactive, onMounted } from 'vue'
 import AuthSideBar from "../components/AuthSideBar.vue";
+import LoadingScreen from '@/components/LoadingScreen.vue';
+import { authStore } from '@/stores/usersStore';
 import pdfMake from 'pdfmake/build/pdfmake'
 import pdfFonts from 'pdfmake/build/vfs_fonts'
 import axiosInstance from "../http";
@@ -47,16 +49,17 @@ import {logoBase64} from '../logoBase64Image'
 pdfMake.vfs = pdfFonts.pdfMake.vfs
 
 onMounted(() => {
-  axiosInstance.get("https://api.pediatrics.or.tz/api/v1/auth/users/")
+  axiosInstance.get("auth/users/")
   .then(async(response) => {
     console.log(response.data);
-    const [user] =await response.data;
+    const [user] = await response.data;
     userData.user=user
   })
   .catch(error => {
     console.log(error);
   });
 })
+const authdata = authStore()
 
 const userData = reactive({
 user:{}
