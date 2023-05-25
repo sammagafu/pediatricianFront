@@ -20,7 +20,9 @@
                 </div>
                 <div class="col-lg-8">
                   <h2>{{ userData.user.first_name }} {{ userData.user.middle_name }} {{ userData.user.last_name }}</h2>
-                  <p>Membership ID: {{ userData.user.memberId }}</p>
+                  <!-- <p>Membership ID: {{ userData.user.memberId }}</p> -->
+                  <p v-if="userData.user.typeofmember=='Associate Member'">Membership ID: PAT-AS-{{ userData.user.pk }}</p>
+                  <p v-else>Membership ID: PAT-OD-{{ userData.user.pk }}</p>
                   <p>Member type: {{ userData.user.typeofmember }}</p>
                 </div>
               </div>

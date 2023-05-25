@@ -79,8 +79,8 @@ export default {
       });
 
       onMounted(() => {
-        
-        axios.get('https://api.pediatrics.or.tz/api/v1/conference/').then((response)=>{
+        const uninterceptedAxiosInstance = axios.create();
+        uninterceptedAxiosInstance.get('https://api.pediatrics.or.tz/api/v1/conference/').then((response)=>{
             conferences.value = response.data
         })
         authdata.isLoading = false;
