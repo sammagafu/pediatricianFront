@@ -40,7 +40,7 @@
                     </a>
                 </div>
                 
-                <div class="nav-bar-links" id="open-nav-bar-menu"  :class="{active:tooglevalue}">
+                <div class="nav-bar-links" :class="{active:tooglevalue}">
                     <ul class="level-1">
                         <li class="item-level-1">
                             <router-link :to="{name:'home'}" class="link-level-1">Home</router-link>
@@ -55,23 +55,24 @@
                         </li>
 
                         <li class="item-level-1">
-                            <router-link :to="{name:'conference'}" class="link-level-1">Conferences</router-link>
+                            <a href="https://congress.pediatrics.or.tz/" target="_blank" rel="noopener noreferrer" class="link-level-1">Conferences</a>
+                            <!-- <router-link :to="{name:'conference'}" class="link-level-1">Conferences</router-link> -->
                         </li>
                         <li class="item-level-1">
                             <router-link :to="{name:'projects'}" class="link-level-1">Projects</router-link>
                         </li>
 
                         <li class="item-level-1">
+                            <a href="http://lms.pediatrics.or.tz" target="_blank" rel="noopener noreferrer" class="link-level-1">LMS</a>
+                            <!-- <router-link :to="{name:'conference'}" class="link-level-1">Conferences</router-link> -->
+                        </li>
+
+                        <li class="item-level-1">
                             <router-link :to="{name:'contact'}" class="link-level-1">Contact Us</router-link>
                         </li>
                         <!-- {{userStore.token}} -->
-                        <li class="item-level-1" v-if="!userStore.token">
+                        <li class="item-level-1">
                             <router-link :to="{name:'login'}" class="link-level-1">Login</router-link>
-                        </li>
-
-                        <li class="item-level-1" v-else>
-                            <a class="link-level-1" @click="userStore.logoutUser">Logout</a>
-                            <!-- <router-link :to="{name:'login'}" class="link-level-1">Logout</router-link> -->
                         </li>
                     </ul>
                 </div>
@@ -110,7 +111,7 @@ export default{
     },
     methods : {
         toogleMenu (){
-           this.tooglevalue != this.tooglevalue
+           this.tooglevalue = !this.tooglevalue
            console.log(this.tooglevalue)
         },
     }
