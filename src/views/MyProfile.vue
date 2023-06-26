@@ -44,7 +44,7 @@ import AuthSideBar from "../components/AuthSideBar.vue";
 import LoadingScreen from '@/components/LoadingScreen.vue';
 import { authStore } from '@/stores/usersStore';
 import pdfMake from 'pdfmake/build/pdfmake'
-import pdfFonts from 'pdfmake/build/vfs_fonts'
+// import pdfFonts from 'pdfmake/build/vfs_fonts'
 import axiosInstance from "../http";
 import {logoBase64} from '../logoBase64Image'
 
