@@ -205,33 +205,39 @@
         </section>
 
 </template>
-
 <script>
-    // import axios from 'axios';
-    import axiosInstance from '../http';
-    export default{
-        data(){
-            return {
-                projects:[]
-            }
-        },
-        methods:{
-        getResources(){
-            axiosInstance.get("project/")
-            .then(response => {
-                        this.projects = response.data;
-                        console.log(this.projects)
-            })
-            .catch(error => {
-                console.log(error);
-            });
+// import axios from 'axios'
+import axiosInstance from '../http';
+import AuthSideBar from '@/components/AuthSideBar.vue';
+import LoadingScreen from '@/components/LoadingScreen.vue';
+import { ref, onMounted,onBeforeMount } from 'vue'
+import { authStore } from '../stores/usersStore';
+export default {
+
+    setup(){
+        const authdata = authStore()
+        const projects = ref([])
+        onBeforeMount(()=>{
+            authdata.isLoading = true
+        })
+        onMounted(() => {
+            axiosInstance.get('resource')
+                .then(response => {
+                    projects.value = response.data;
+                    console.log(response.data)
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+            authdata.isLoading = false  
+        })
+        return {
+            projects,authdata
         }
     },
-    mounted (){
-        this.getResources()
-    }
 
-    }
+    components: {LoadingScreen }
+}
 </script>
 
 <style scoped>
