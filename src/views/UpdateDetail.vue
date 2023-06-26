@@ -82,30 +82,3 @@ export default {
 }
 </script>
 
-// import AuthSideBar from "../components/AuthSideBar.vue";
-// import axiosInstance from "../http";
-// export default {
-//   data() {
-//     return {
-//       up: [],
-//     };
-//   },
-//   mounted() {
-//     this.getProductDetail();
-//   },
-//   methods: {
-//     getProductDetail() {
-//       axiosInstance
-//         .get(`update/${route.params.slug}`)
-//         .then((response) => {
-//           this.up = response.data;
-//           document.title = "PAT: " + response.data.projectname;
-//         })
-//         .catch((error) => {
-//           console.log(error);
-//         });
-//     },
-//   },
-//   components: { AuthSideBar },
-// };
-// </script>
