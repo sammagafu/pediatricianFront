@@ -63,7 +63,7 @@
                         </li>
 
                         <li class="item-level-1">
-                            <a href="http://lms.pediatrics.or.tz" target="_blank" rel="noopener noreferrer" class="link-level-1">LMS</a>
+                            <a href="https://pediatrics.ac.tz" target="_blank" rel="noopener noreferrer" class="link-level-1">LMS</a>
                             <!-- <router-link :to="{name:'conference'}" class="link-level-1">Conferences</router-link> -->
                         </li>
 
