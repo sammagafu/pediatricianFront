@@ -1,6 +1,9 @@
 <template>
+   
 
 <LoadingScreen :loading="authdata.isLoading"/>
+
+<FullscreenBanner />
     
   <section class="header">
     <div class="header-carousel header-img">
